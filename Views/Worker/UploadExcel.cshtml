@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Upload Workers via Excel";
+}
+
+<h2 class="mb-3">Upload Excel</h2>
+
+<form asp-controller="Worker" asp-action="PreviewExcel" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label">Select Excel File (.xlsx)</label>
+        <input type="file" name="file" accept=".xlsx" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Preview</button>
+
+    @if (ViewBag.Error != null)
+    {
+        <p class="text-danger mt-2">@ViewBag.Error</p>
+    }
+</form>

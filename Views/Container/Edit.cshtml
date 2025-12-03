@@ -1,0 +1,31 @@
+@model ContainerAutomationApp.Models.Container
+
+<h2>Edit Container</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label>Container Number</label>
+        <input asp-for="ContainerNumber" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Size</label>
+        <input asp-for="Size" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Location</label>
+        <input asp-for="Location" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Assigned Crane</label>
+        <select asp-for="AssignedCraneId" asp-items="ViewBag.Cranes" class="form-control">
+            <option value="">-- Select Crane --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-2">Update</button>
+</form>

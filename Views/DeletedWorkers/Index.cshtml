@@ -1,0 +1,48 @@
+@model IEnumerable<ContainerAutomationApp.Models.DeletedWorker>
+@{
+    ViewData["Title"] = "Deleted Worker History";
+}
+
+<h2 class="mb-4">🗑 Deleted Worker History</h2>
+
+<div class="d-flex justify-content-between mb-3">
+    <a asp-action="Index" asp-controller="Worker" class="btn btn-secondary">← Back to All Workers</a>
+    <a asp-action="ExportDeletedToExcel" class="btn btn-info">📤 Export to Excel</a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Certification</th>
+            <th>Assigned Crane</th>
+            <th>Assigned Shift</th>
+            <th>Deleted At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="7" class="text-center text-muted">No deleted workers found.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var w in Model)
+            {
+                <tr>
+                    <td>@w.Id</td>
+                    <td>@w.Name</td>
+                    <td>@w.Phone</td>
+                    <td>@w.Certification</td>
+                    <td>@(w.Crane ?? "N/A")</td>
+                    <td>@(w.Shift ?? "N/A")</td>
+                    <td>@w.DeletedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

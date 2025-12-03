@@ -1,0 +1,30 @@
+@model ContainerAutomationApp.Models.Container
+@{
+    ViewData["Title"] = "Assign Crane";
+    var cranes = ViewBag.Cranes as List<ContainerAutomationApp.Models.Crane> ?? new List<ContainerAutomationApp.Models.Crane>();
+}
+
+<h2>Assign Crane to @Model.ContainerNumber</h2>
+
+<div class="mb-3">
+    <strong>Location:</strong> @Model.Location <br />
+    <strong>Current Crane:</strong> @(Model.AssignedCrane?.Name ?? "Unassigned")
+</div>
+
+<form method="post">
+    <input type="hidden" name="containerId" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label for="craneId">Choose Crane</label>
+        <select name="craneId" class="form-control" required>
+            <option value="">-- Select Crane --</option>
+            @foreach (var crane in cranes)
+            {
+                <option value="@crane.Id">@crane.Name (@crane.Type)</option>
+            }
+        </select>
+    </div>
+
+    <button class="btn btn-primary">Assign Crane</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Back</a>
+</form>

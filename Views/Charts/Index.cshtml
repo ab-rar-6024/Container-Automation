@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Dashboard Charts";
+    var onLeave = ViewBag.OnLeave;
+    var assigned = ViewBag.Assigned;
+    var unassigned = ViewBag.Unassigned;
+}
+
+<h2>Worker Distribution</h2>
+
+<canvas id="workerChart" height="100"></canvas>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('workerChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['On Leave', 'Assigned', 'Unassigned'],
+                datasets: [{
+                    label: '# of Workers',
+                    data: [@onLeave, @assigned, @unassigned],
+                    backgroundColor: ['#f39c12', '#2ecc71', '#e74c3c']
+                }]
+            }
+        });
+    </script>
+}

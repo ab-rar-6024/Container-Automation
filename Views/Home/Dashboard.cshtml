@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center">
+    <h2>Container Automation Dashboard</h2>
+    <p class="text-muted">Welcome to the admin dashboard. Use the menu to manage your terminal.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card bg-light mb-3">
+                <div class="card-header">Workers</div>
+                <div class="card-body">
+                    <p class="card-text">Manage all registered workers.</p>
+                    <a href="/Worker" class="btn btn-primary">View Workers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light mb-3">
+                <div class="card-header">Crane Allocation</div>
+                <div class="card-body">
+                    <p class="card-text">Auto/manual crane assignment.</p>
+                    <a href="/Crane" class="btn btn-primary">Allocate Cranes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light mb-3">
+                <div class="card-header">Upload Workers</div>
+                <div class="card-body">
+                    <p class="card-text">Import from Excel with auto-assignment.</p>
+                    <a href="/Worker/Upload" class="btn btn-success">Upload Excel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

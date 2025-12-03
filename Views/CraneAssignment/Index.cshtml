@@ -1,0 +1,43 @@
+@model IEnumerable<ContainerAutomationApp.Models.CraneAssignment>
+@{
+    ViewData["Title"] = "Crane Assignments";
+}
+
+<h2>Crane Assignments</h2>
+
+<div class="mb-3">
+    <a class="btn btn-primary" asp-action="AutoAssign">⚙️ Run Auto Assignment</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Date</th>
+            <th>Shift</th>
+            <th>Crane</th>
+            <th>Type</th>
+            <th>Workers Assigned</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var assignment in Model)
+{
+    <tr>
+        <td>@assignment.Date.ToString("yyyy-MM-dd")</td>
+        <td>@assignment.Shift?.Name</td>
+        <td>@assignment.Crane?.Name</td>
+        <td>@assignment.Crane?.Type</td>
+        <td>
+            <ul>
+@foreach (var wa in assignment.WorkerAssignments)
+{
+    <li>
+        <b>@wa.Worker?.Name</b> — @wa.Worker?.Role (@wa.WorkDuration.TotalHours h work / @wa.RestDuration.TotalHours h rest)
+    </li>
+}
+            </ul>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

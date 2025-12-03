@@ -1,0 +1,42 @@
+@model ContainerAutomationApp.Models.LeaveRequest
+
+@{
+    ViewData["Title"] = "Request Leave";
+}
+
+<h2 class="mb-4">📝 Request Leave</h2>
+
+<form asp-action="Create" method="post">
+    <!-- Worker Selection -->
+    <div class="mb-3">
+        <label asp-for="WorkerId" class="form-label">Select Worker</label>
+        <select asp-for="WorkerId" asp-items="ViewBag.Workers" class="form-select" required>
+            <option value="">-- Select Worker --</option>
+        </select>
+        <span asp-validation-for="WorkerId" class="text-danger"></span>
+    </div>
+
+    <!-- Date Selection -->
+    <div class="mb-3">
+        <label asp-for="Date" class="form-label">Leave Date</label>
+        <input asp-for="Date" class="form-control" type="datetime-local" required />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <!-- Leave Type -->
+    <div class="mb-3">
+        <label asp-for="LeaveType" class="form-label">Leave Type</label>
+        <select asp-for="LeaveType" class="form-select" required>
+            <option value="">-- Select Leave Type --</option>
+            <option value="Normal">Normal</option>
+            <option value="Special">Special</option>
+        </select>
+        <span asp-validation-for="LeaveType" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Leave Request</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

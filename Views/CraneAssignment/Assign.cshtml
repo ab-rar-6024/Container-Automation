@@ -1,0 +1,24 @@
+@model ContainerAutomationApp.Models.Worker
+@{
+    ViewData["Title"] = "Assign Crane";
+    var cranes = ViewBag.Cranes as List<ContainerAutomationApp.Models.Crane>;
+}
+
+<h2>Assign Crane to @Model.Name</h2>
+
+<form method="post">
+    <input type="hidden" name="workerId" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label>Select Compatible Crane</label>
+        <select name="craneId" class="form-control" required>
+            <option value="">Select Crane</option>
+            @foreach (var crane in cranes)
+            {
+                <option value="@crane.Id">@crane.Name (@crane.Type)</option>
+            }
+        </select>
+    </div>
+
+    <button class="btn btn-primary">Assign Crane</button>
+</form>

@@ -1,0 +1,26 @@
+@model List<ContainerAutomationApp.Models.Crane>
+@{
+    ViewData["Title"] = "Crane Assignment Map";
+}
+
+<h2>Crane-Container Map</h2>
+
+<div class="row">
+    @foreach (var crane in Model)
+    {
+        <div class="col-md-3">
+            <div class="card mb-3 shadow-sm">
+                <div class="card-header bg-dark text-white">@crane.Name (@crane.Type)</div>
+                <div class="card-body">
+                    <h6>Assigned Workers:</h6>
+                    <ul class="list-group">
+                        @foreach (var worker in crane.AssignedWorkers ?? new List<ContainerAutomationApp.Models.Worker>())
+                        {
+                            <li class="list-group-item">@worker.Name (@worker.Certification)</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,51 @@
+@model List<ContainerAutomationApp.Models.Worker>
+@{
+    ViewData["Title"] = "Preview Excel Data";
+}
+
+<h2 class="mb-3">Preview Imported Workers</h2>
+
+@if (Model != null && Model.Any())
+{
+    <form asp-action="ConfirmExcelUpload" method="post">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <input type="hidden" name="workers[@i].Name" value="@Model[i].Name" />
+            <input type="hidden" name="workers[@i].Phone" value="@Model[i].Phone" />
+            <input type="hidden" name="workers[@i].Certification" value="@Model[i].Certification" />
+            <input type="hidden" name="workers[@i].AssignedShiftId" value="@Model[i].AssignedShiftId" />
+            <input type="hidden" name="workers[@i].AssignedCraneId" value="@Model[i].AssignedCraneId" />
+        }
+
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Certification</th>
+                    <th>Assigned Shift</th>
+                    <th>Assigned Crane</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var w in Model)
+                {
+                    <tr>
+                        <td>@w.Name</td>
+                        <td>@w.Phone</td>
+                        <td>@w.Certification</td>
+                        <td>@(w.AssignedShiftId ?? 0)</td>
+                        <td>@(w.AssignedCraneId ?? 0)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-success">✅ Confirm & Save to Database</button>
+        <a asp-action="UploadExcel" class="btn btn-secondary">🔁 Back</a>
+    </form>
+}
+else
+{
+    <div class="alert alert-warning">⚠ No valid data found in the Excel file.</div>
+}

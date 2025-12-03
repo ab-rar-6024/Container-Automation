@@ -1,0 +1,50 @@
+@model List<ContainerAutomationApp.Models.LeaveRequest>
+
+@{
+    ViewData["Title"] = "Leave Requests";
+}
+
+<h2>Leave Requests</h2>
+
+<a class="btn btn-success mb-3" href="/Leave/Create">Request Leave</a>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th> <!-- Added -->
+            <th>Worker</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var leave in Model)
+        {
+            <tr>
+                <td>@leave.Id</td> <!-- Added -->
+                <td>@leave.Worker?.Name</td>
+                <td>@leave.Date.ToString("dd-MM-yyyy HH:mm")</td>
+                <td>@leave.Status</td>
+                <td>
+                    @if (leave.Status == "Pending")
+                    {
+                        <form asp-action="Approve" asp-route-id="@leave.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                        </form>
+                        <form asp-action="Reject" asp-route-id="@leave.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    }
+                    <a asp-action="Edit" asp-route-id="@leave.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@leave.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

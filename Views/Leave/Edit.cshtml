@@ -1,0 +1,36 @@
+@model ContainerAutomationApp.Models.LeaveRequest
+@{
+    ViewData["Title"] = "Edit Leave Request";
+    var workers = ViewBag.Workers as SelectList;
+    var leaveTypes = ViewBag.LeaveTypes as SelectList;
+    var statusOptions = ViewBag.StatusOptions as SelectList;
+}
+
+<h2>Edit Leave Request</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="WorkerId" class="form-label">Worker</label>
+        <select asp-for="WorkerId" asp-items="workers" class="form-control"></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Date" class="form-label">Date</label>
+        <input asp-for="Date" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LeaveType" class="form-label">Leave Type</label>
+        <select asp-for="LeaveType" asp-items="leaveTypes" class="form-control"></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label">Status</label>
+        <select asp-for="Status" asp-items="statusOptions" class="form-control"></select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

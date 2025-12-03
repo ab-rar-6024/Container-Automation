@@ -1,0 +1,33 @@
+@model List<ContainerAutomationApp.Models.Container>
+@{
+    ViewData["Title"] = "Containers";
+}
+
+<h2>Container Assignments</h2>
+<a href="/Container/Create" class="btn btn-success mb-3">Add Container</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Container</th>
+            <th>Size</th>
+            <th>Location</th>
+            <th>Crane</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var c in Model)
+{
+    <tr>
+        <td>@c.ContainerNumber</td>
+        <td>@c.Size</td>
+        <td>@c.Location</td>
+        <td>@c.AssignedCrane?.Name (@c.AssignedCrane?.Type)</td>
+        <td>
+            <a class="btn btn-warning btn-sm" href="/Container/Assign/@c.Id">Assign/Change</a>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

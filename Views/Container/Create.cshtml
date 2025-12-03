@@ -1,0 +1,31 @@
+@model ContainerAutomationApp.Models.Container
+@{
+    ViewData["Title"] = "Add Container";
+}
+
+<h2>Add Container</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label>Container Number</label>
+        <input name="ContainerNumber" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Size</label>
+        <select name="Size" class="form-control">
+            <option>20ft</option>
+            <option>40ft</option>
+            <option>45ft</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Location</label>
+        <select name="Location" class="form-control">
+            <option>Ship</option>
+            <option>Yard</option>
+            <option>Gate</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary">Save</button>
+</form>
